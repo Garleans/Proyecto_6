@@ -13,7 +13,7 @@ const app = express();
 connectDB();
 
 const allowedOrigins = [
-    'https://ejemplo-random.app',
+    'https://proyecto-6-juan-opazo.onrender.com',
 ];
 
 //middlewares
