@@ -1,7 +1,7 @@
 const Book = require('../models/Book');
 exports.getAllbooks = async (req, res) => {
         try {
-        const books = await book.find({});
+        const books = await Book.find({});
         return res.status(200).json({ books });
     } catch (error) {
         return res.status(500).json({
@@ -14,7 +14,7 @@ exports.getAllbooks = async (req, res) => {
 exports.createbook = async (req, res) => {
     try {
         const { name, author, price } = req.body;
-        const newbook = await book.create({ name, author, price });
+        const newbook = await Book.create({ name, author, price });
         if (!newbook) return res.status(400).json({ error: 'No se pudo crear el libro' });
         return res.status(201).json({ datos: newbook });
     } catch (error) {
@@ -28,7 +28,7 @@ exports.createbook = async (req, res) => {
 exports.updatebookById = async (req, res) => {
     try {
         const { name,author, price } = req.body;
-        const updatedbook = await book.findByIdAndUpdate(
+        const updatedbook = await Book.findByIdAndUpdate(
             req.params.id,
             { name,author, price},
             { new: true, runValidators: true }
@@ -45,7 +45,7 @@ exports.updatebookById = async (req, res) => {
 
 exports.deletebookById = async (req, res) => {
     try {
-        const deletedbook = await book.findByIdAndDelete(req.params.id);
+        const deletedbook = await Book.findByIdAndDelete(req.params.id);
         if (!deletedbook) return res.status(404).json({ message: 'Libro no encontrado' });
         return res.status(200).json({ message: 'El libro se elimino correctamente' });
     } catch (error) {

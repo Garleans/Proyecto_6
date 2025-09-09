@@ -32,8 +32,8 @@ app.use(cors({
 
 app.use(express.json());
 
-app.use('/api/v1/users', userRouter); // localhost:3000/api/v1/users
-app.use('/api/v1/books', bookRouter); // localhost:3000/api/v1/books
+app.use('/api/v1/users', userRouter); // https://proyecto-6-juan-opazo.onrender.com/api/v1/users
+app.use('/api/v1/books', bookRouter); // https://proyecto-6-juan-opazo.onrender.com/api/v1/books
 
 app.listen(PORT, () => {
     console.log('servidor corriendo en el puerto: ', PORT);
