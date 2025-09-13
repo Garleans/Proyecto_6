@@ -9,7 +9,7 @@ exports.getAllbooks = async (req, res) => {
             error: error.message
         })
     }
-}
+};
 
 exports.createbook = async (req, res) => {
     try {
@@ -23,7 +23,7 @@ exports.createbook = async (req, res) => {
             error: error.message
         })
     }
-}
+};
 
 exports.updatebookById = async (req, res) => {
     try {
@@ -54,4 +54,20 @@ exports.deletebookById = async (req, res) => {
             error: error.message
         })
     }
-}
+};
+
+exports.getBookById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const book = await Book.findById(id);
+    if (!book) {
+      return res.status(404).json({ message: 'Libro no encontrado' });
+    }
+    res.status(200).json({ libro: book });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Hubo un error al obtener el libro',
+      error: error.message,
+    });
+  }
+};

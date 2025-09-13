@@ -83,3 +83,39 @@ exports.verifyUser = async (req, res) => {
     });
   }
 };
+
+exports.updateUser = async (req, res) => {
+  const userId = req.user.id;
+  const updateData = req.body;
+
+  try {
+    if (updateData.email) {
+      const emailExists = await User.findOne({ email: updateData.email });
+      if (emailExists && emailExists._id.toString() !== userId) {
+        return res.status(400).json({ message: "Hubo un error al actualizar la información" });
+      }
+    }
+
+    if (updateData.password) {
+      const salt = await bcryptjs.genSalt(10);
+      updateData.password = await bcryptjs.hash(updateData.password, salt);
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $set: updateData },
+      { new: true, runValidators: true }
+    ).select("-password");
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    res.json({ message: "Usuario actualizado con éxito", usuario: updatedUser });
+  } catch (error) {
+    res.status(500).json({
+      message: "Hubo un error al actualizar el usuario",
+      error: error.message,
+    });
+  }
+};

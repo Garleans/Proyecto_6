@@ -6,5 +6,6 @@ const userRouter = express.Router();
 userRouter.post('/register', createUser); // https://proyecto-6-juan-opazo.onrender.com/api/v1/users/register
 userRouter.post('/login', login); // https://proyecto-6-juan-opazo.onrender.com/api/v1/users/login
 userRouter.get('/verify-user', auth, verifyUser); // https://proyecto-6-juan-opazo.onrender.com/api/v1/users/verify-user
+userRouter.put('/update', auth, updateUser); // https://proyecto-6-juan-opazo.onrender.com/api/v1/users/update
 
 module.exports = userRouter;
