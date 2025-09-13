@@ -1,6 +1,6 @@
 const express = require('express');
 const auth = require('../middleware/authorization');
-const { createUser, login, verifyUser } = require('../controllers/user.controller');
+const { createUser, login, verifyUser, updateUser} = require('../controllers/user.controller');
 const userRouter = express.Router();
 
 userRouter.post('/register', createUser); // https://proyecto-6-juan-opazo.onrender.com/api/v1/users/register
